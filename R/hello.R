@@ -15,9 +15,11 @@
 #' Hello world
 #'
 #' Print hello world
+#'
+#' This is the details.
+#'
 #' @examples
 #' hello()
-#' @export
 hello <- function() {
   print("Hello, world!")
 }

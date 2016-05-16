@@ -9,6 +9,9 @@ hello()
 \description{
 Print hello world
 }
+\details{
+This is the details.
+}
 \examples{
 hello()
 }
