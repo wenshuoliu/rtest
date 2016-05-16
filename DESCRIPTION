@@ -1,10 +1,12 @@
 Package: rtest
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A testing package for learning R
 Version: 0.1
 Date: 2016-05-11
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Wenshuo Liu
+Maintainer: Wenshuo Liu <wenshuoliu@gmail.com>
+Description: Some functions I wrote to test many methods in package development,
+    including the functionalities of many packages like devtools and Rcpp.
+License: GPL
 LazyData: TRUE
+RoxygenNote: 5.0.1
