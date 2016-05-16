@@ -10,3 +10,6 @@ Description: Some functions I wrote to test many methods in package development,
 License: GPL
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
