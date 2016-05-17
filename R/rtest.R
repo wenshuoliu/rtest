@@ -7,4 +7,6 @@
 #'
 #'@docType package
 #'@name rtest
+#'@useDynLib rtest
+#'@importFrom Rcpp sourceCpp
 NULL
