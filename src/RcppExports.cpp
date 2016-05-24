@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// convolveCpp
+NumericVector convolveCpp(NumericVector a, NumericVector b);
+RcppExport SEXP rtest_convolveCpp(SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
+    __result = Rcpp::wrap(convolveCpp(a, b));
+    return __result;
+END_RCPP
+}
 // timesTwo
 NumericVector timesTwo(NumericVector x);
 RcppExport SEXP rtest_timesTwo(SEXP xSEXP) {

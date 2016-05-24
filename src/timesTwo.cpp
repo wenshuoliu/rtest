@@ -31,5 +31,5 @@ NumericVector timesTwo(NumericVector x) {
 //
 
 /*** R
-timesTwo(42)
+timesTwo(1:5)
 */
