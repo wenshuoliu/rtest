@@ -17,6 +17,42 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// orderBeta
+NumericMatrix orderBeta(int p, int q, double theta, bool ref);
+RcppExport SEXP rtest_orderBeta(SEXP pSEXP, SEXP qSEXP, SEXP thetaSEXP, SEXP refSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< bool >::type ref(refSEXP);
+    __result = Rcpp::wrap(orderBeta(p, q, theta, ref));
+    return __result;
+END_RCPP
+}
+// sugerTest
+NumericVector sugerTest(int N, double mu, double sigma);
+RcppExport SEXP rtest_sugerTest(SEXP NSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
+    __result = Rcpp::wrap(sugerTest(N, mu, sigma));
+    return __result;
+END_RCPP
+}
+// vecIndex
+void vecIndex();
+RcppExport SEXP rtest_vecIndex() {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    vecIndex();
+    return R_NilValue;
+END_RCPP
+}
 // timesTwo
 NumericVector timesTwo(NumericVector x);
 RcppExport SEXP rtest_timesTwo(SEXP xSEXP) {

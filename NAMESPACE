@@ -3,6 +3,7 @@
 export(convolveCpp)
 export(convolveR)
 export(hello)
+export(orderBeta)
 export(timesTwo)
 importFrom(Rcpp,sourceCpp)
 useDynLib(rtest)
