@@ -15,6 +15,21 @@ convolveCpp <- function(a, b) {
     .Call('rtest_convolveCpp', PACKAGE = 'rtest', a, b)
 }
 
+#'test for matrix transpose
+#'
+#'@param Amat a matrix to be transposed
+#'
+#'@return the transpose of matrix Amat
+#'
+#'@export
+transpose <- function(Amat) {
+    .Call('rtest_transpose', PACKAGE = 'rtest', Amat)
+}
+
+vecIndex <- function() {
+    invisible(.Call('rtest_vecIndex', PACKAGE = 'rtest'))
+}
+
 #'Generating a partial ordered matrix of beta
 #'
 #'This function generates a matrix of beta with size p*q, with a partial order in both direction. A parameter
@@ -39,10 +54,6 @@ orderBeta <- function(p, q, theta, ref = 1L) {
 #'@return Gaussian samples
 sugerTest <- function(N, mu, sigma) {
     .Call('rtest_sugerTest', PACKAGE = 'rtest', N, mu, sigma)
-}
-
-vecIndex <- function() {
-    invisible(.Call('rtest_vecIndex', PACKAGE = 'rtest'))
 }
 
 #'Function timesTwo
