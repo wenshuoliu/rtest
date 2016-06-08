@@ -26,6 +26,25 @@ transpose <- function(Amat) {
     .Call('rtest_transpose', PACKAGE = 'rtest', Amat)
 }
 
+#'test for matrix slicing
+#'@export
+matrix_test <- function(Amat) {
+    invisible(.Call('rtest_matrix_test', PACKAGE = 'rtest', Amat))
+}
+
+#'test for calling an R function
+#'
+#'Call the R function quadprog::solve.QP to solve a quadratic programming problem
+#'
+#'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
+#'
+#'@return a list containing the solution
+#'
+#'@export
+callR <- function(Dmat, dvec, Amat, f) {
+    .Call('rtest_callR', PACKAGE = 'rtest', Dmat, dvec, Amat, f)
+}
+
 vecIndex <- function() {
     invisible(.Call('rtest_vecIndex', PACKAGE = 'rtest'))
 }

@@ -30,6 +30,30 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// matrix_test
+void matrix_test(MatrixXd Amat);
+RcppExport SEXP rtest_matrix_test(SEXP AmatSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    matrix_test(Amat);
+    return R_NilValue;
+END_RCPP
+}
+// callR
+List callR(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat, Function f);
+RcppExport SEXP rtest_callR(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AmatSEXP, SEXP fSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Dmat(DmatSEXP);
+    Rcpp::traits::input_parameter< VectorXd >::type dvec(dvecSEXP);
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    Rcpp::traits::input_parameter< Function >::type f(fSEXP);
+    __result = Rcpp::wrap(callR(Dmat, dvec, Amat, f));
+    return __result;
+END_RCPP
+}
 // vecIndex
 void vecIndex();
 RcppExport SEXP rtest_vecIndex() {
