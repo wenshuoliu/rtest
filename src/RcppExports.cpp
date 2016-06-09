@@ -54,6 +54,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// quad
+List quad(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat);
+RcppExport SEXP rtest_quad(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AmatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Dmat(DmatSEXP);
+    Rcpp::traits::input_parameter< VectorXd >::type dvec(dvecSEXP);
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    __result = Rcpp::wrap(quad(Dmat, dvec, Amat));
+    return __result;
+END_RCPP
+}
 // vecIndex
 void vecIndex();
 RcppExport SEXP rtest_vecIndex() {

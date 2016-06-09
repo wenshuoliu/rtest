@@ -36,12 +36,29 @@ void matrix_test(MatrixXd Amat)
 //'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
 //'
 //'@return a list containing the solution
-//'
-//'@export
 //[[Rcpp::export]]
 List callR(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat, Function f)
 {
   List result;
   result = f(Dmat, dvec, Amat);
+  return result;
+}
+
+//'C++ function to call the R function quadprog::solve.QP
+//'
+//'Call the R function quadprog::solve.QP to solve a quadratic programming problem
+//'
+//'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
+//'
+//'@return a list containing the solution
+//'
+//'@export
+//[[Rcpp::export]]
+List quad(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat)
+{
+  List result;
+  Environment myEnv = Environment::namespace_env("quadprog");
+  Function quadR = myEnv["solve.QP"];
+  result = quadR(Dmat, dvec, Amat);
   return result;
 }

@@ -39,10 +39,21 @@ matrix_test <- function(Amat) {
 #'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
 #'
 #'@return a list containing the solution
-#'
-#'@export
 callR <- function(Dmat, dvec, Amat, f) {
     .Call('rtest_callR', PACKAGE = 'rtest', Dmat, dvec, Amat, f)
+}
+
+#'C++ function to call the R function quadprog::solve.QP
+#'
+#'Call the R function quadprog::solve.QP to solve a quadratic programming problem
+#'
+#'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
+#'
+#'@return a list containing the solution
+#'
+#'@export
+quad <- function(Dmat, dvec, Amat) {
+    .Call('rtest_quad', PACKAGE = 'rtest', Dmat, dvec, Amat)
 }
 
 vecIndex <- function() {

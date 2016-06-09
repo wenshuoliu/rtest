@@ -15,6 +15,7 @@ Suggests: knitr,
     testthat
 VignetteBuilder: knitr
 Imports: Rcpp,
-    RcppEigen
+    RcppEigen,
+    quadprog
 LinkingTo: Rcpp,
     RcppEigen
