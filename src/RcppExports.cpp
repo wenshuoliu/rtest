@@ -7,19 +7,6 @@
 
 using namespace Rcpp;
 
-// quadprog_solve
-List quadprog_solve(const MatrixXd& Dmat, const VectorXd& dvec, const MatrixXd& Amat);
-RcppExport SEXP rtest_quadprog_solve(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AmatSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const MatrixXd& >::type Dmat(DmatSEXP);
-    Rcpp::traits::input_parameter< const VectorXd& >::type dvec(dvecSEXP);
-    Rcpp::traits::input_parameter< const MatrixXd& >::type Amat(AmatSEXP);
-    __result = Rcpp::wrap(quadprog_solve(Dmat, dvec, Amat));
-    return __result;
-END_RCPP
-}
 // convolveCpp
 NumericVector convolveCpp(NumericVector a, NumericVector b);
 RcppExport SEXP rtest_convolveCpp(SEXP aSEXP, SEXP bSEXP) {
@@ -29,6 +16,54 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
     __result = Rcpp::wrap(convolveCpp(a, b));
+    return __result;
+END_RCPP
+}
+// transpose
+MatrixXd transpose(MatrixXd Amat);
+RcppExport SEXP rtest_transpose(SEXP AmatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    __result = Rcpp::wrap(transpose(Amat));
+    return __result;
+END_RCPP
+}
+// matrix_test
+void matrix_test(MatrixXd Amat);
+RcppExport SEXP rtest_matrix_test(SEXP AmatSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    matrix_test(Amat);
+    return R_NilValue;
+END_RCPP
+}
+// callR
+List callR(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat, Function f);
+RcppExport SEXP rtest_callR(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AmatSEXP, SEXP fSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Dmat(DmatSEXP);
+    Rcpp::traits::input_parameter< VectorXd >::type dvec(dvecSEXP);
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    Rcpp::traits::input_parameter< Function >::type f(fSEXP);
+    __result = Rcpp::wrap(callR(Dmat, dvec, Amat, f));
+    return __result;
+END_RCPP
+}
+// quadprog_solve
+List quadprog_solve(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat);
+RcppExport SEXP rtest_quadprog_solve(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AmatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< MatrixXd >::type Dmat(DmatSEXP);
+    Rcpp::traits::input_parameter< VectorXd >::type dvec(dvecSEXP);
+    Rcpp::traits::input_parameter< MatrixXd >::type Amat(AmatSEXP);
+    __result = Rcpp::wrap(quadprog_solve(Dmat, dvec, Amat));
     return __result;
 END_RCPP
 }
