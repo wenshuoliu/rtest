@@ -52,7 +52,7 @@ T sample_vec(std::vector<T> & vec){
 //'@return A matrix of beta's
 //'@export
 // [[Rcpp::export]]
-NumericMatrix orderBeta(int p, int q, double theta, bool ref = 1) {
+NumericMatrix orderBeta(int p, int q, double theta, bool ref = true) {
   NumericMatrix beta(p, q);
   std::fill(beta.begin(), beta.end(), NAN);
   int size = p*q;
@@ -60,7 +60,7 @@ NumericMatrix orderBeta(int p, int q, double theta, bool ref = 1) {
   NumericVector incr_beta = rnorm(size, 0, 1.);
   incr_beta = abs(incr_beta);
   //shrink the increment, i.e. fuse
-  NumericVector spike = rbinom(size, 1, theta);
+  NumericVector spike = rbinom(size, 1, 1.-theta);
   incr_beta = incr_beta*spike;
 
   if (ref == 1)
@@ -85,13 +85,13 @@ NumericMatrix orderBeta(int p, int q, double theta, bool ref = 1) {
     if (p_cand.is_valid()){
       coord neighbor(p_cand.i(), p_cand.j() -1, p, q);
       if (!neighbor.is_valid()) candid.push_back(p_cand);
-      else if (beta(neighbor.i(), neighbor.j())>=0.) candid.push_back(p_cand);
+      else if (!isnan(beta(neighbor.i(), neighbor.j()))) candid.push_back(p_cand);
     }
     p_cand = coord(chosen.i(), chosen.j() + 1, p, q);
     if (p_cand.is_valid()){
       coord neighbor(p_cand.i() - 1, p_cand.j(), p, q);
       if (!neighbor.is_valid()) candid.push_back(p_cand);
-      else if (beta(neighbor.i(), neighbor.j())>= 0.) candid.push_back(p_cand);
+      else if (!isnan(beta(neighbor.i(), neighbor.j()))) candid.push_back(p_cand);
     }
     /*
     Rcout<<beta<<std::endl;

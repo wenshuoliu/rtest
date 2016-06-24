@@ -4,7 +4,7 @@
 \alias{orderBeta}
 \title{Generating a partial ordered matrix of beta}
 \usage{
-orderBeta(p, q, theta, ref = 1L)
+orderBeta(p, q, theta, ref = TRUE)
 }
 \arguments{
 \item{p, q}{Dimensions of the beta matrix}
