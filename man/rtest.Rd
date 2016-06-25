@@ -10,6 +10,9 @@ The rtest package is a package I write to learn to write a package.
 }
 \section{rtest functions}{
 
-The rtest package includes functions: hello().
+The rtest package includes functions:
+\link{hello}
+\link{convolveR}
+\link{convolveCpp}
 }
 
