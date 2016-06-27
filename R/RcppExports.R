@@ -15,6 +15,10 @@ convolveCpp <- function(a, b) {
     .Call('rtest_convolveCpp', PACKAGE = 'rtest', a, b)
 }
 
+#'C++ function implemented by QuadProg++
+#'
+NULL
+
 #'test for matrix transpose
 #'
 #'@param Amat a matrix to be transposed
@@ -52,8 +56,17 @@ callR <- function(Dmat, dvec, Amat, f) {
 #'@return a list containing the solution
 #'
 #'@export
-quadprog_solve <- function(Dmat, dvec, Amat) {
-    .Call('rtest_quadprog_solve', PACKAGE = 'rtest', Dmat, dvec, Amat)
+quadprog_solveR <- function(Dmat, dvec, Amat) {
+    .Call('rtest_quadprog_solveR', PACKAGE = 'rtest', Dmat, dvec, Amat)
+}
+
+#'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
+#'
+#'@return a list containing the solution
+#'
+#'@export
+quadprog_solveC <- function(Dmat, dvec, Amat) {
+    .Call('rtest_quadprog_solveC', PACKAGE = 'rtest', Dmat, dvec, Amat)
 }
 
 vecIndex <- function() {

@@ -1,4 +1,5 @@
 #include<RcppEigen.h>
+#include "eiquadprog.hpp"
 
 // [[Rcpp::depends(RcppEigen)]]
 
@@ -54,7 +55,7 @@ List callR(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat, Function f)
 //'
 //'@export
 //[[Rcpp::export]]
-List quadprog_solve(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat)
+List quadprog_solveR(const MatrixXd & Dmat, const VectorXd & dvec, const MatrixXd & Amat)
 {
   List result;
   Environment myEnv = Environment::namespace_env("quadprog");
@@ -62,3 +63,35 @@ List quadprog_solve(MatrixXd Dmat, VectorXd dvec, MatrixXd Amat)
   result = quadR(Dmat, dvec, Amat);
   return result;
 }
+
+//'C++ function implemented by QuadProg++
+//'
+
+//'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
+//'
+//'@return a list containing the solution
+//'
+//'@export
+//[[Rcpp::export]]
+List quadprog_solveC(const MatrixXd & Dmat, const VectorXd & dvec, const MatrixXd & Amat)
+{
+  MatrixXd D = Dmat;
+  VectorXd d = (-1.)*dvec; //different definition in R package quadprog and QuadProg++
+
+  int n = d.size();
+  int m = Amat.rows();
+
+  VectorXd x(n); //to store the solution
+
+  MatrixXd CE = MatrixXd::Zero(n, 1);
+
+  VectorXd ce0(1);
+  ce0(0) = 0.;
+
+  VectorXd ci0 = VectorXd::Zero(m);
+
+  double value = solve_quadprog(D, d, CE, ce0, -1.*Amat, ci0, x);
+  List res = List::create(Named("solution") = x, Named("value") = value);
+  return res;
+}
+
