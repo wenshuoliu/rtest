@@ -1,5 +1,5 @@
 #include<RcppEigen.h>
-#include "eiquadprog.hpp"
+#include "EigenQP.h"
 
 // [[Rcpp::depends(RcppEigen)]]
 
@@ -66,32 +66,45 @@ List quadprog_solveR(const MatrixXd & Dmat, const VectorXd & dvec, const MatrixX
 
 //'C++ function implemented by QuadProg++
 //'
-
 //'@param Dmat,dvec,Amat See \code{\link[quadprog]{solve.QP}} for explanation.
 //'
 //'@return a list containing the solution
 //'
 //'@export
 //[[Rcpp::export]]
-List quadprog_solveC(const MatrixXd & Dmat, const VectorXd & dvec, const MatrixXd & Amat)
+List quadprog_solveC(const MatrixXd & Dmat, const VectorXd & dvec, const MatrixXd & At)
 {
-  MatrixXd D = Dmat;
-  VectorXd d = (-1.)*dvec; //different definition in R package quadprog and QuadProg++
+//Because the solve_quadprog() function requires at least one equality constraint, I manually add one more
+//  dimension to the variable.
+  int n = dvec.size();
+  int m = At.cols();
 
-  int n = d.size();
-  int m = Amat.rows();
+  MatrixXd G(n+1, n+1);
+  G << Dmat, MatrixXd::Zero(n, 1),
+       MatrixXd::Zero(1, n), 1;
+
+  VectorXd g0(n+1);
+  g0 << (-1.)*dvec, 0; //different definition in R package quadprog and QuadProg++
 
   VectorXd x(n); //to store the solution
 
-  MatrixXd CE = MatrixXd::Zero(n, 1);
+  MatrixXd CE(n+1, 1);
+  CE << MatrixXd::Zero(n, 1), 1;
 
   VectorXd ce0(1);
   ce0(0) = 0.;
 
+  MatrixXd CI(n+1, m);
+  CI << At,
+        MatrixXd::Zero(1, m);
+
   VectorXd ci0 = VectorXd::Zero(m);
 
-  double value = solve_quadprog(D, d, CE, ce0, -1.*Amat, ci0, x);
-  List res = List::create(Named("solution") = x, Named("value") = value);
+  //std::cout<<CE<<std::endl;
+
+  double value = QP::solve_quadprog(G, g0, CE, ce0, CI, ci0, x);
+
+  List res = List::create(Named("solution") = x.head(n), Named("value") = value);
   return res;
 }
 

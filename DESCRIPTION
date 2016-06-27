@@ -16,7 +16,8 @@ Suggests: knitr,
 VignetteBuilder: knitr
 Imports: Rcpp,
     RcppEigen,
-    quadprog
+    quadprog,
+    ggplot2,
+    ggrepel
 LinkingTo: Rcpp,
     RcppEigen
-

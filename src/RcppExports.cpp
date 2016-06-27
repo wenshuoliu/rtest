@@ -68,15 +68,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // quadprog_solveC
-List quadprog_solveC(const MatrixXd& Dmat, const VectorXd& dvec, const MatrixXd& Amat);
-RcppExport SEXP rtest_quadprog_solveC(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AmatSEXP) {
+List quadprog_solveC(const MatrixXd& Dmat, const VectorXd& dvec, const MatrixXd& At);
+RcppExport SEXP rtest_quadprog_solveC(SEXP DmatSEXP, SEXP dvecSEXP, SEXP AtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const MatrixXd& >::type Dmat(DmatSEXP);
     Rcpp::traits::input_parameter< const VectorXd& >::type dvec(dvecSEXP);
-    Rcpp::traits::input_parameter< const MatrixXd& >::type Amat(AmatSEXP);
-    __result = Rcpp::wrap(quadprog_solveC(Dmat, dvec, Amat));
+    Rcpp::traits::input_parameter< const MatrixXd& >::type At(AtSEXP);
+    __result = Rcpp::wrap(quadprog_solveC(Dmat, dvec, At));
     return __result;
 END_RCPP
 }

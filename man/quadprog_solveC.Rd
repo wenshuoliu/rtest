@@ -4,7 +4,7 @@
 \alias{quadprog_solveC}
 \title{C++ function implemented by QuadProg++}
 \usage{
-quadprog_solveC(Dmat, dvec, Amat)
+quadprog_solveC(Dmat, dvec, At)
 }
 \arguments{
 \item{Dmat, dvec, Amat}{See \code{\link[quadprog]{solve.QP}} for explanation.}
